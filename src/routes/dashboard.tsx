@@ -229,7 +229,7 @@ function MonthSummary({ userId }: { userId: string }) {
 function FoodTab() {
   const [items, setItems] = useState<Withdrawal[]>([]);
   const [loading, setLoading] = useState(true);
-  const [period, setPeriod] = useState<string>("3m");
+  const [period, setPeriod] = useState<string>("este_mes");
   const [startDate, setStartDate] = useState(() => {
     const d = new Date();
     d.setMonth(d.getMonth() - 1);
@@ -449,7 +449,7 @@ function UberTab() {
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [note, setNote] = useState("");
   const [saving, setSaving] = useState(false);
-  const [period, setPeriod] = useState<string>("3m");
+  const [period, setPeriod] = useState<string>("este_mes");
   const [startDate, setStartDate] = useState(() => {
     const d = new Date();
     d.setMonth(d.getMonth() - 1);
