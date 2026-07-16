@@ -128,7 +128,8 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
       });
 
       if (!txRes.ok) {
-        console.error(`Failed to fetch transactions for account ${accId}`);
+        const errText = await txRes.text();
+        console.error(`Failed to fetch transactions for account ${accId}:`, errText);
         continue;
       }
 
