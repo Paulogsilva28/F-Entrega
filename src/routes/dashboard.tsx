@@ -22,7 +22,7 @@ import {
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { LogOut, RefreshCw, Trash2, Plus, Archive, History } from "lucide-react";
-import { listFoodWithdrawals, syncFoodWithdrawals } from "@/lib/gmail-sync.functions";
+import { listFoodWithdrawals } from "@/lib/gmail-sync.functions";
 import { syncPluggyExpenses } from "@/lib/pluggy-sync.functions";
 
 export const Route = createFileRoute("/dashboard")({
@@ -229,7 +229,6 @@ function MonthSummary({ userId }: { userId: string }) {
 function FoodTab() {
   const [items, setItems] = useState<Withdrawal[]>([]);
   const [loading, setLoading] = useState(true);
-  const [syncing, setSyncing] = useState(false);
   const [period, setPeriod] = useState<string>("3m");
 
   const { cutoff, label } = useMemo(() => {
@@ -262,21 +261,6 @@ function FoodTab() {
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [period]);
-
-  async function handleSync() {
-    setSyncing(true);
-    try {
-      const res = await syncFoodWithdrawals();
-      toast.success(`Sincronizado: ${res.inserted} novos, ${res.skipped} ignorados`);
-      console.log("[sync] result", res);
-      if (res.errors?.length) console.warn("Sync errors", res.errors);
-      await load();
-    } catch (e: any) {
-      toast.error(e?.message ?? "Erro ao sincronizar");
-    } finally {
-      setSyncing(false);
-    }
-  }
 
   const [syncingPluggy, setSyncingPluggy] = useState(false);
 
@@ -332,16 +316,10 @@ function FoodTab() {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-2 gap-2">
-        <Button onClick={handleSync} disabled={syncing} variant="secondary" className="w-full">
-          <RefreshCw className={`mr-2 h-4 w-4 ${syncing ? "animate-spin" : ""}`} />
-          {syncing ? "Sincronizando e-mails..." : "Sincronizar e-mails"}
-        </Button>
-        <Button onClick={handleSyncPluggy} disabled={syncingPluggy} variant="secondary" className="w-full">
-          <RefreshCw className={`mr-2 h-4 w-4 ${syncingPluggy ? "animate-spin" : ""}`} />
-          {syncingPluggy ? "Sincronizando Pluggy..." : "Sincronizar Extrato (Pluggy)"}
-        </Button>
-      </div>
+      <Button onClick={handleSyncPluggy} disabled={syncingPluggy} variant="secondary" className="w-full">
+        <RefreshCw className={`mr-2 h-4 w-4 ${syncingPluggy ? "animate-spin" : ""}`} />
+        {syncingPluggy ? "Sincronizando Pluggy..." : "Sincronizar Extrato (Pluggy)"}
+      </Button>
 
       <Card>
         <CardContent className="p-0">
