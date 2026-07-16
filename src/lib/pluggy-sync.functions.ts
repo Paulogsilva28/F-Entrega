@@ -6,10 +6,15 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
   .handler(async ({ context }) => {
     const { supabase, userId } = context;
 
-    const PLUGGY_CLIENT_ID = process.env.PLUGGY_CLIENT_ID;
-    const PLUGGY_CLIENT_SECRET = process.env.PLUGGY_CLIENT_SECRET;
-    const PLUGGY_ITEM_ID = process.env.PLUGGY_ITEM_ID; // ID da conexão (Ex: obtido na URL do meu.pluggy.ai)
-    const PLUGGY_ACCOUNT_ID = process.env.PLUGGY_ACCOUNT_ID; // ID da conta (opcional se tiver o ITEM_ID)
+    let PLUGGY_CLIENT_ID = process.env.PLUGGY_CLIENT_ID;
+    let PLUGGY_CLIENT_SECRET = process.env.PLUGGY_CLIENT_SECRET;
+    let PLUGGY_ITEM_ID = process.env.PLUGGY_ITEM_ID; // ID da conexão (Ex: obtido na URL do meu.pluggy.ai)
+    let PLUGGY_ACCOUNT_ID = process.env.PLUGGY_ACCOUNT_ID; // ID da conta (opcional se tiver o ITEM_ID)
+
+    if (PLUGGY_CLIENT_ID) PLUGGY_CLIENT_ID = PLUGGY_CLIENT_ID.trim();
+    if (PLUGGY_CLIENT_SECRET) PLUGGY_CLIENT_SECRET = PLUGGY_CLIENT_SECRET.trim();
+    if (PLUGGY_ITEM_ID) PLUGGY_ITEM_ID = PLUGGY_ITEM_ID.trim();
+    if (PLUGGY_ACCOUNT_ID) PLUGGY_ACCOUNT_ID = PLUGGY_ACCOUNT_ID.trim();
 
     if (!PLUGGY_CLIENT_ID || !PLUGGY_CLIENT_SECRET) {
       throw new Error("Missing Pluggy environment variables: PLUGGY_CLIENT_ID, PLUGGY_CLIENT_SECRET");
