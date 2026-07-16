@@ -225,6 +225,12 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
               });
 
             if (insertError) {
+              await supabase.from("pluggy_sync_logs").insert({
+                user_id: userId,
+                log_type: "insert_error",
+                message: `Failed to insert Uber earning ${tx.id}: ${insertError.message}`,
+                payload: { tx, error: insertError },
+              });
               if (insertError.code === "23505") {
                 skipped++;
               } else {
@@ -245,6 +251,12 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
               });
 
             if (insertError) {
+              await supabase.from("pluggy_sync_logs").insert({
+                user_id: userId,
+                log_type: "insert_error",
+                message: `Failed to insert 99 Food earning ${tx.id}: ${insertError.message}`,
+                payload: { tx, error: insertError },
+              });
               if (insertError.code === "23505") {
                 skipped++;
               } else {
