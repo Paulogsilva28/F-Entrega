@@ -20,6 +20,7 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
     }
 
     // 1. Autenticar na API da Pluggy para obter a apiKey
+    console.log("[Pluggy] Authenticating with clientId:", PLUGGY_CLIENT_ID);
     const authRes = await fetch("https://api.pluggy.ai/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -31,29 +32,37 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
 
     if (!authRes.ok) {
       const errText = await authRes.text();
+      console.error("[Pluggy] Authentication failed:", errText);
       throw new Error(`Pluggy authentication failed: ${errText}`);
     }
 
     const { apiKey } = await authRes.json();
+    console.log("[Pluggy] Authenticated. apiKey acquired.");
 
     // 2. Determinar as contas (Account IDs) a serem sincronizadas
     const accountIds: string[] = [];
 
     if (PLUGGY_ACCOUNT_ID) {
       accountIds.push(PLUGGY_ACCOUNT_ID);
+      console.log("[Pluggy] Using explicit accountId:", PLUGGY_ACCOUNT_ID);
     } else if (PLUGGY_ITEM_ID) {
-      // Se tivermos o ITEM_ID, buscamos todas as contas associadas a essa conexão
+      console.log("[Pluggy] Fetching accounts for itemId:", PLUGGY_ITEM_ID);
       const accountsRes = await fetch(`https://api.pluggy.ai/accounts?itemId=${PLUGGY_ITEM_ID}`, {
         headers: { "X-API-KEY": apiKey },
       });
 
       if (!accountsRes.ok) {
         const errText = await accountsRes.text();
+        console.error("[Pluggy] Failed to fetch accounts:", errText);
         throw new Error(`Failed to fetch Pluggy accounts for Item ${PLUGGY_ITEM_ID}: ${errText}`);
       }
 
-      const { results: accounts } = await accountsRes.json();
-      for (const acc of (accounts ?? [])) {
+      const accData = await accountsRes.json();
+      console.log("[Pluggy] Accounts raw response:", JSON.stringify(accData));
+      const accounts = accData.results ?? [];
+      console.log("[Pluggy] Extracted accounts count:", accounts.length);
+      for (const acc of accounts) {
+        console.log("[Pluggy] Account found:", acc.id, acc.name, acc.type);
         if (acc.id) accountIds.push(acc.id);
       }
     }
