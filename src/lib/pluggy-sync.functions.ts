@@ -141,6 +141,19 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
         console.log(`[Pluggy] Sample transaction: ${transactions[0].description} | Amount: ${transactions[0].amount}`);
       }
 
+      // Salvar logs no Supabase para depuração direta do usuário
+      const sampleTx = (transactions ?? []).filter((tx: any) => {
+        const date = (tx.date ?? "").slice(0, 10);
+        return date.includes("2026-07-15") || date.includes("2026-07-16");
+      });
+
+      await supabase.from("pluggy_sync_logs").insert({
+        user_id: userId,
+        log_type: "transactions_debug",
+        message: `Account ${accId}: Fetched ${transactions?.length ?? 0} transactions. Found ${sampleTx.length} for Jul 15/16.`,
+        payload: { sampleTransactions: sampleTx },
+      });
+
       for (const tx of (transactions ?? [])) {
         const rawAmount = Number(tx.amount);
         const description = (tx.description ?? "").toUpperCase();
