@@ -23,6 +23,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { LogOut, RefreshCw, Trash2, Plus, Archive, History } from "lucide-react";
 import { listFoodWithdrawals, syncFoodWithdrawals } from "@/lib/gmail-sync.functions";
+import { syncPluggyExpenses } from "@/lib/pluggy-sync.functions";
 
 export const Route = createFileRoute("/dashboard")({
   component: DashboardPage,
@@ -587,7 +588,21 @@ function MotoTabInner() {
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [saving, setSaving] = useState(false);
   const [closing, setClosing] = useState(false);
+  const [syncingPluggy, setSyncingPluggy] = useState(false);
   const [history, setHistory] = useState<Array<{ key: string; label: string; total: number; count: number }>>([]);
+
+  async function handleSyncPluggy() {
+    setSyncingPluggy(true);
+    try {
+      const res = await syncPluggyExpenses();
+      toast.success(`${res.inserted} novos gastos importados, ${res.skipped} duplicados.`);
+      await load();
+    } catch (e: any) {
+      toast.error(e?.message ?? "Erro ao sincronizar com a Pluggy");
+    } finally {
+      setSyncingPluggy(false);
+    }
+  }
 
   async function load() {
     setLoading(true);
@@ -718,6 +733,16 @@ function MotoTabInner() {
           </form>
         </CardContent>
       </Card>
+
+      <Button
+        onClick={handleSyncPluggy}
+        disabled={syncingPluggy}
+        variant="secondary"
+        className="w-full"
+      >
+        <RefreshCw className={`mr-2 h-4 w-4 ${syncingPluggy ? "animate-spin" : ""}`} />
+        {syncingPluggy ? "Sincronizando Pluggy..." : "Sincronizar Extrato (Pluggy)"}
+      </Button>
 
       <Card>
         <CardContent className="p-0">
