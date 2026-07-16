@@ -146,10 +146,6 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
         const description = (tx.description ?? "").toUpperCase();
         const date = (tx.date ?? "").slice(0, 10); // Formato YYYY-MM-DD
 
-        if (date.includes("2026-07-15") || date.includes("2026-07-16")) {
-          console.log("[Pluggy] Transaction raw 15/16:", JSON.stringify(tx));
-        }
-
         if (rawAmount < 0) {
           // --- GASTOS / SAÍDAS ---
           const amount = Math.abs(rawAmount);
@@ -181,8 +177,9 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
           }
         } else if (rawAmount > 0) {
           // --- GANHOS / ENTRADAS (Créditos) ---
-          const isUber = description.includes("UBER") || description.includes("PARTNERPAY") || description.includes("RAIS UBER");
-          const is99 = description.includes("99APP") || description.includes("99PAY") || description.includes("99FOOD") || description.includes("99 TECNOLOGIA") || description.includes("99 TEC");
+          const txStr = JSON.stringify(tx).toUpperCase();
+          const isUber = txStr.includes("UBER") || txStr.includes("PARTNERPAY") || txStr.includes("DIGIO");
+          const is99 = txStr.includes("99PAY") || txStr.includes("99 FOOD") || txStr.includes("99FOOD") || txStr.includes("99APP") || txStr.includes("99 TECNOLOGIA") || txStr.includes("99 TEC") || txStr.includes("99 IP") || txStr.includes("99PAY IP");
 
           if (isUber) {
             const { error: insertError } = await supabase
