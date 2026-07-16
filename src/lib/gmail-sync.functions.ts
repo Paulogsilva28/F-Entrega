@@ -4,16 +4,21 @@ import { runGmailSyncForUser } from "@/server/gmail-sync.server";
 
 export const listFoodWithdrawals = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data: { since: string }) => data)
+  .inputValidator((data: { since: string; until?: string }) => data)
   .handler(async ({ data, context }) => {
     const { supabase, userId } = context;
 
-    const { data: rows, error } = await supabase
+    let query = supabase
       .from("food_withdrawals")
       .select("id, amount, withdrawal_date")
       .eq("user_id", userId)
-      .gte("withdrawal_date", data.since)
-      .order("withdrawal_date", { ascending: false });
+      .gte("withdrawal_date", data.since);
+
+    if (data.until) {
+      query = query.lte("withdrawal_date", data.until);
+    }
+
+    const { data: rows, error } = await query.order("withdrawal_date", { ascending: false });
 
     if (error) {
       throw new Error(error.message);

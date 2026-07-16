@@ -1,0 +1,1015 @@
+[
+  {
+    "id": "d301419d-7b1c-4b14-a581-01e1dba11d5b",
+    "created_at": "2026-07-16T18:32:39.784012+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning 0b143309-4d0d-4e56-bf43-eca44a80cc5e: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "0b143309-4d0d-4e56-bf43-eca44a80cc5e",
+        "date": "2026-06-14T10:20:47.848Z",
+        "type": "CREDIT",
+        "order": 6,
+        "amount": 332.52,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "0222856f-5371-4f75-812d-e49e5812d970",
+    "created_at": "2026-07-16T18:32:39.478377+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning b55d1cc6-e519-497e-9d27-bfaeef82138b: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "b55d1cc6-e519-497e-9d27-bfaeef82138b",
+        "date": "2026-06-15T02:22:05.374Z",
+        "type": "CREDIT",
+        "order": 8,
+        "amount": 17.81,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Transfers",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "05000000",
+        "providerId": null,
+        "description": "Transferência Recebida",
+        "paymentData": {
+          "payer": {
+            "name": "99 FOOD LTDA.",
+            "branchNumber": "0030",
+            "accountNumber": "00906046-0",
+            "routingNumber": "208",
+            "documentNumber": {
+              "type": "CNPJ",
+              "value": "60.112.920/0001-23"
+            },
+            "routingNumberISPB": "30306294"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "c011c104-105a-49f1-bd28-74187b656aaa",
+    "created_at": "2026-07-16T18:32:39.01909+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning f0b2530a-0382-4989-9440-c872c188ccaf: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "f0b2530a-0382-4989-9440-c872c188ccaf",
+        "date": "2026-06-17T15:29:55.157Z",
+        "type": "CREDIT",
+        "order": 2,
+        "amount": 94.76,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "d72613ef-591e-4b2f-9d29-cc01cffe0a3a",
+    "created_at": "2026-07-16T18:32:38.713412+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning 0784cab3-3983-4ee1-a778-d5dc7f5a2dc7: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "0784cab3-3983-4ee1-a778-d5dc7f5a2dc7",
+        "date": "2026-06-19T15:03:18.161Z",
+        "type": "CREDIT",
+        "order": 3,
+        "amount": 95,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "94f54d3b-d468-493e-936f-536e5051873c",
+    "created_at": "2026-07-16T18:32:38.402939+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning 2d7f6913-0085-4077-8a9e-8b5fd687935e: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "2d7f6913-0085-4077-8a9e-8b5fd687935e",
+        "date": "2026-06-22T00:27:06.704Z",
+        "type": "CREDIT",
+        "order": 2,
+        "amount": 134.97,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "1815efb4-247e-4e84-a5a5-50133f40d7d6",
+    "created_at": "2026-07-16T18:32:37.941201+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert Uber earning 15da05b1-4bc2-458f-ba0c-0d14d597a1e1: Could not find the 'pluggy_transaction_id' column of 'uber_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "15da05b1-4bc2-458f-ba0c-0d14d597a1e1",
+        "date": "2026-06-22T12:21:02.593Z",
+        "type": "CREDIT",
+        "order": 0,
+        "amount": 68.16,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Taxi and ride-hailing",
+        "merchant": {
+          "cnpj": "17.895.646/0001-87",
+          "name": "Uber",
+          "businessName": "UBER DO BRASIL TECNOLOGIA LTDA."
+        },
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "19010000",
+        "providerId": null,
+        "description": "Transferência Recebida|UBER DO BRASIL TECNOLOGIA LTDA                   .",
+        "paymentData": {
+          "payer": {
+            "name": "UBER DO BRASIL TECNOLOGIA LTDA.",
+            "branchNumber": "0001",
+            "accountNumber": "10692201-2",
+            "routingNumber": "745",
+            "documentNumber": {
+              "type": "CNPJ",
+              "value": "17.895.646/0001-87"
+            },
+            "routingNumberISPB": "33479023"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|UBER DO BRASIL TECNOLOGIA LTDA                   .",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'uber_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "6a6057b7-29fd-48d2-99ea-5289c0b75655",
+    "created_at": "2026-07-16T18:32:37.636114+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning 9fc40d32-a7ba-4f9e-a448-f5aff65e8e9f: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "9fc40d32-a7ba-4f9e-a448-f5aff65e8e9f",
+        "date": "2026-06-23T23:31:31.929Z",
+        "type": "CREDIT",
+        "order": 0,
+        "amount": 84.5,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "466f00c3-d336-4cbb-ae3b-a9d82ffb9e20",
+    "created_at": "2026-07-16T18:32:37.325999+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning 76cb1ec2-78d5-4704-ab75-2cd99491230b: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "76cb1ec2-78d5-4704-ab75-2cd99491230b",
+        "date": "2026-06-25T15:59:14.951Z",
+        "type": "CREDIT",
+        "order": 3,
+        "amount": 138,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "3097f696-13fe-424f-88e0-2a9d73e57019",
+    "created_at": "2026-07-16T18:32:37.017793+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning a020a673-4261-4fce-83c9-b6b49f213419: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "a020a673-4261-4fce-83c9-b6b49f213419",
+        "date": "2026-06-27T17:55:35.688Z",
+        "type": "CREDIT",
+        "order": 2,
+        "amount": 11.76,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "ce51392a-a6be-4ac2-bf4b-8d5a0b18d7f8",
+    "created_at": "2026-07-16T18:32:36.715197+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert Uber earning 1418420b-546a-4a6e-8fdc-514419a357c8: Could not find the 'pluggy_transaction_id' column of 'uber_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "1418420b-546a-4a6e-8fdc-514419a357c8",
+        "date": "2026-06-27T21:15:56.031Z",
+        "type": "CREDIT",
+        "order": 0,
+        "amount": 66.35,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Taxi and ride-hailing",
+        "merchant": {
+          "cnpj": "17.895.646/0001-87",
+          "name": "Uber",
+          "businessName": "UBER DO BRASIL TECNOLOGIA LTDA."
+        },
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "19010000",
+        "providerId": null,
+        "description": "Transferência Recebida|UBER DO BRASIL TECNOLOGIA LTDA",
+        "paymentData": {
+          "payer": {
+            "name": "UBER DO BRASIL TECNOLOGIA LTDA.",
+            "branchNumber": "0001",
+            "accountNumber": "42516802-9",
+            "routingNumber": "745",
+            "documentNumber": {
+              "type": "CNPJ",
+              "value": "17.895.646/0001-87"
+            },
+            "routingNumberISPB": "33479023"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|UBER DO BRASIL TECNOLOGIA LTDA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'uber_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "ac7b0cc4-0729-4e37-adf3-c54b53ba5948",
+    "created_at": "2026-07-16T18:32:36.397025+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning af4cb9ed-33ec-416c-9ab2-c3dba22ee460: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "af4cb9ed-33ec-416c-9ab2-c3dba22ee460",
+        "date": "2026-06-30T03:23:52.629Z",
+        "type": "CREDIT",
+        "order": 3,
+        "amount": 121.63,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "fcb69893-c791-4bdb-a11a-d5e27460d3a2",
+    "created_at": "2026-07-16T18:32:36.090229+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning 0096751f-aa4f-45a4-8402-46cf50ad564c: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "0096751f-aa4f-45a4-8402-46cf50ad564c",
+        "date": "2026-07-01T22:28:01.925Z",
+        "type": "CREDIT",
+        "order": 3,
+        "amount": 112,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "c5a8ac72-27a1-47c8-a008-4776e654db0e",
+    "created_at": "2026-07-16T18:32:35.780732+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning 03654c81-e493-4a34-b0dd-e119dc9debb4: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "03654c81-e493-4a34-b0dd-e119dc9debb4",
+        "date": "2026-07-02T14:38:41.007Z",
+        "type": "CREDIT",
+        "order": 1,
+        "amount": 66.55,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "c6a06b7a-7351-4ca6-865c-26bdb888e18a",
+    "created_at": "2026-07-16T18:32:35.465315+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning 5c67ef8d-50f8-4c01-91e9-0b5081eab9c4: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "5c67ef8d-50f8-4c01-91e9-0b5081eab9c4",
+        "date": "2026-07-06T18:49:10.563Z",
+        "type": "CREDIT",
+        "order": 1,
+        "amount": 321.6,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  },
+  {
+    "id": "8df6bbb7-cd2c-4f84-9e55-17477f00ec27",
+    "created_at": "2026-07-16T18:32:35.154638+00:00",
+    "log_type": "insert_error",
+    "message": "Failed to insert 99 Food earning e76f5190-b750-4b62-88cd-6d47fc936554: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "payload": {
+      "tx": {
+        "id": "e76f5190-b750-4b62-88cd-6d47fc936554",
+        "date": "2026-07-08T22:13:35.825Z",
+        "type": "CREDIT",
+        "order": 1,
+        "amount": 127,
+        "status": "POSTED",
+        "balance": null,
+        "category": "Same person transfer",
+        "merchant": null,
+        "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+        "createdAt": "2026-07-16T07:01:20.918Z",
+        "updatedAt": "2026-07-16T07:01:20.918Z",
+        "categoryId": "04000000",
+        "providerId": null,
+        "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "paymentData": {
+          "payer": {
+            "name": null,
+            "branchNumber": "0001",
+            "accountNumber": "28488607-6",
+            "routingNumber": "769",
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": "24313102"
+          },
+          "reason": null,
+          "receiver": {
+            "name": null,
+            "branchNumber": null,
+            "accountNumber": null,
+            "routingNumber": null,
+            "documentNumber": {
+              "type": "CPF",
+              "value": "073.478.261-60"
+            },
+            "routingNumberISPB": null
+          },
+          "paymentMethod": "PIX",
+          "boletoMetadata": null,
+          "referenceNumber": null,
+          "receiverReferenceId": null
+        },
+        "currencyCode": "BRL",
+        "providerCode": null,
+        "operationType": "PIX",
+        "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+        "creditCardMetadata": null,
+        "amountInAccountCurrency": null,
+        "operationTypeAdditionalInfo": null
+      },
+      "error": {
+        "code": "PGRST204",
+        "hint": null,
+        "details": null,
+        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+      }
+    }
+  }
+]

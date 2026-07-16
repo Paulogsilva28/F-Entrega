@@ -230,25 +230,75 @@ function FoodTab() {
   const [items, setItems] = useState<Withdrawal[]>([]);
   const [loading, setLoading] = useState(true);
   const [period, setPeriod] = useState<string>("3m");
-
-  const { cutoff, label } = useMemo(() => {
+  const [startDate, setStartDate] = useState(() => {
     const d = new Date();
+    d.setMonth(d.getMonth() - 1);
+    return d.toISOString().slice(0, 10);
+  });
+  const [endDate, setEndDate] = useState(() => new Date().toISOString().slice(0, 10));
+
+  const { since, until, label } = useMemo(() => {
+    const now = new Date();
+    let sinceDate = new Date();
+    let untilDate = new Date();
     let label = "";
+
     switch (period) {
-      case "7d": d.setDate(d.getDate() - 7); label = "últimos 7 dias"; break;
-      case "30d": d.setDate(d.getDate() - 30); label = "últimos 30 dias"; break;
-      case "3m": d.setMonth(d.getMonth() - 3); label = "últimos 3 meses"; break;
-      case "6m": d.setMonth(d.getMonth() - 6); label = "últimos 6 meses"; break;
-      case "12m": d.setMonth(d.getMonth() - 12); label = "últimos 12 meses"; break;
-      case "all": d.setFullYear(2000); label = "todo o período"; break;
+      case "7d":
+        sinceDate.setDate(now.getDate() - 7);
+        label = "últimos 7 dias";
+        break;
+      case "30d":
+        sinceDate.setDate(now.getDate() - 30);
+        label = "últimos 30 dias";
+        break;
+      case "este_mes":
+        sinceDate = new Date(now.getFullYear(), now.getMonth(), 1);
+        label = "este mês";
+        break;
+      case "mes_anterior":
+        sinceDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+        untilDate = new Date(now.getFullYear(), now.getMonth(), 0);
+        label = "mês anterior";
+        break;
+      case "3m":
+        sinceDate.setMonth(now.getMonth() - 3);
+        label = "últimos 3 meses";
+        break;
+      case "6m":
+        sinceDate.setMonth(now.getMonth() - 6);
+        label = "últimos 6 meses";
+        break;
+      case "12m":
+        sinceDate.setMonth(now.getMonth() - 12);
+        label = "últimos 12 meses";
+        break;
+      case "personalizado":
+        sinceDate = new Date(startDate + "T00:00:00");
+        untilDate = new Date(endDate + "T23:59:59");
+        label = `período de ${new Date(startDate + "T12:00:00").toLocaleDateString("pt-BR")} a ${new Date(endDate + "T12:00:00").toLocaleDateString("pt-BR")}`;
+        break;
+      case "all":
+      default:
+        sinceDate.setFullYear(2000);
+        label = "todo o período";
+        break;
     }
-    return { cutoff: d, label };
-  }, [period]);
+    return { 
+      since: sinceDate.toISOString(), 
+      until: untilDate.toISOString(), 
+      label 
+    };
+  }, [period, startDate, endDate]);
 
   async function load() {
     setLoading(true);
     try {
-      const data = await listFoodWithdrawals({ data: { since: cutoff.toISOString() } });
+      const payload: { since: string; until?: string } = { since };
+      if (period === "mes_anterior" || period === "personalizado") {
+        payload.until = until;
+      }
+      const data = await listFoodWithdrawals({ data: payload });
       setItems((data ?? []).map((r) => ({ ...r, amount: Number(r.amount) })));
     } catch (error: any) {
       toast.error(error?.message ?? "Erro ao carregar saques");
@@ -260,7 +310,7 @@ function FoodTab() {
   useEffect(() => {
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [period]);
+  }, [period, startDate, endDate]);
 
   const [syncingPluggy, setSyncingPluggy] = useState(false);
 
@@ -289,7 +339,7 @@ function FoodTab() {
       <Card>
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between gap-2">
-            <CardTitle className="text-xs font-medium text-muted-foreground">
+            <CardTitle className="text-xs font-medium text-muted-foreground text-left">
               Total — {label}
             </CardTitle>
             <Select value={period} onValueChange={setPeriod}>
@@ -299,22 +349,49 @@ function FoodTab() {
               <SelectContent>
                 <SelectItem value="7d">Últimos 7 dias</SelectItem>
                 <SelectItem value="30d">Últimos 30 dias</SelectItem>
+                <SelectItem value="este_mes">Este Mês</SelectItem>
+                <SelectItem value="mes_anterior">Mês Anterior</SelectItem>
                 <SelectItem value="3m">Últimos 3 meses</SelectItem>
                 <SelectItem value="6m">Últimos 6 meses</SelectItem>
                 <SelectItem value="12m">Últimos 12 meses</SelectItem>
+                <SelectItem value="personalizado">Personalizado</SelectItem>
                 <SelectItem value="all">Tudo</SelectItem>
               </SelectContent>
             </Select>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="text-3xl font-semibold tabular-nums">{BRL(total)}</div>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {items.length} {items.length === 1 ? "saque" : "saques"} desde{" "}
-            {cutoff.toLocaleDateString("pt-BR")}
+          <div className="text-3xl font-semibold tabular-nums text-left">{BRL(total)}</div>
+          <p className="mt-1 text-xs text-muted-foreground text-left">
+            {items.length} {items.length === 1 ? "saque" : "saques"} no período
           </p>
         </CardContent>
       </Card>
+
+      {period === "personalizado" && (
+        <Card>
+          <CardContent className="pt-4 grid grid-cols-2 gap-3">
+            <div className="space-y-1.5 text-left">
+              <Label htmlFor="food-start">Data Início</Label>
+              <Input
+                id="food-start"
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+            </div>
+            <div className="space-y-1.5 text-left">
+              <Label htmlFor="food-end">Data Fim</Label>
+              <Input
+                id="food-end"
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <Button onClick={handleSyncPluggy} disabled={syncingPluggy} variant="secondary" className="w-full">
         <RefreshCw className={`mr-2 h-4 w-4 ${syncingPluggy ? "animate-spin" : ""}`} />
@@ -373,28 +450,79 @@ function UberTab() {
   const [note, setNote] = useState("");
   const [saving, setSaving] = useState(false);
   const [period, setPeriod] = useState<string>("3m");
-
-  const { cutoff, label } = useMemo(() => {
+  const [startDate, setStartDate] = useState(() => {
     const d = new Date();
+    d.setMonth(d.getMonth() - 1);
+    return d.toISOString().slice(0, 10);
+  });
+  const [endDate, setEndDate] = useState(() => new Date().toISOString().slice(0, 10));
+
+  const { since, until, label } = useMemo(() => {
+    const now = new Date();
+    let sinceDate = new Date();
+    let untilDate = new Date();
     let label = "";
+
     switch (period) {
-      case "7d": d.setDate(d.getDate() - 7); label = "últimos 7 dias"; break;
-      case "30d": d.setDate(d.getDate() - 30); label = "últimos 30 dias"; break;
-      case "3m": d.setMonth(d.getMonth() - 3); label = "últimos 3 meses"; break;
-      case "6m": d.setMonth(d.getMonth() - 6); label = "últimos 6 meses"; break;
-      case "12m": d.setMonth(d.getMonth() - 12); label = "últimos 12 meses"; break;
-      case "all": d.setFullYear(2000); label = "todo o período"; break;
+      case "7d":
+        sinceDate.setDate(now.getDate() - 7);
+        label = "últimos 7 dias";
+        break;
+      case "30d":
+        sinceDate.setDate(now.getDate() - 30);
+        label = "últimos 30 dias";
+        break;
+      case "este_mes":
+        sinceDate = new Date(now.getFullYear(), now.getMonth(), 1);
+        label = "este mês";
+        break;
+      case "mes_anterior":
+        sinceDate = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+        untilDate = new Date(now.getFullYear(), now.getMonth(), 0);
+        label = "mês anterior";
+        break;
+      case "3m":
+        sinceDate.setMonth(now.getMonth() - 3);
+        label = "últimos 3 meses";
+        break;
+      case "6m":
+        sinceDate.setMonth(now.getMonth() - 6);
+        label = "últimos 6 meses";
+        break;
+      case "12m":
+        sinceDate.setMonth(now.getMonth() - 12);
+        label = "últimos 12 meses";
+        break;
+      case "personalizado":
+        sinceDate = new Date(startDate + "T00:00:00");
+        untilDate = new Date(endDate + "T23:59:59");
+        label = `período de ${new Date(startDate + "T12:00:00").toLocaleDateString("pt-BR")} a ${new Date(endDate + "T12:00:00").toLocaleDateString("pt-BR")}`;
+        break;
+      case "all":
+      default:
+        sinceDate.setFullYear(2000);
+        label = "todo o período";
+        break;
     }
-    return { cutoff: d, label };
-  }, [period]);
+    return { 
+      since: sinceDate.toISOString(), 
+      until: untilDate.toISOString(), 
+      label 
+    };
+  }, [period, startDate, endDate]);
 
   async function load() {
     setLoading(true);
-    const { data, error } = await supabase
+    let query = supabase
       .from("uber_withdrawals")
       .select("id, amount, withdrawal_date, note")
-      .gte("withdrawal_date", cutoff.toISOString())
-      .order("withdrawal_date", { ascending: false });
+      .gte("withdrawal_date", since);
+
+    if (period === "mes_anterior" || period === "personalizado") {
+      query = query.lte("withdrawal_date", until);
+    }
+
+    const { data, error } = await query.order("withdrawal_date", { ascending: false });
     setLoading(false);
     if (error) return toast.error(error.message);
     setItems((data ?? []).map((r) => ({ ...r, amount: Number(r.amount) })));
@@ -403,7 +531,7 @@ function UberTab() {
   useEffect(() => {
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [period]);
+  }, [period, startDate, endDate]);
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
@@ -468,7 +596,7 @@ function UberTab() {
       <Card>
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between gap-2">
-            <CardTitle className="text-xs font-medium text-muted-foreground">
+            <CardTitle className="text-xs font-medium text-muted-foreground text-left">
               Total Uber — {label}
             </CardTitle>
             <Select value={period} onValueChange={setPeriod}>
@@ -478,21 +606,49 @@ function UberTab() {
               <SelectContent>
                 <SelectItem value="7d">Últimos 7 dias</SelectItem>
                 <SelectItem value="30d">Últimos 30 dias</SelectItem>
+                <SelectItem value="este_mes">Este Mês</SelectItem>
+                <SelectItem value="mes_anterior">Mês Anterior</SelectItem>
                 <SelectItem value="3m">Últimos 3 meses</SelectItem>
                 <SelectItem value="6m">Últimos 6 meses</SelectItem>
                 <SelectItem value="12m">Últimos 12 meses</SelectItem>
+                <SelectItem value="personalizado">Personalizado</SelectItem>
                 <SelectItem value="all">Tudo</SelectItem>
               </SelectContent>
             </Select>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="text-3xl font-semibold tabular-nums">{BRL(total)}</div>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {items.length} {items.length === 1 ? "saque" : "saques"}
+          <div className="text-3xl font-semibold tabular-nums text-left">{BRL(total)}</div>
+          <p className="mt-1 text-xs text-muted-foreground text-left">
+            {items.length} {items.length === 1 ? "saque" : "saques"} no período
           </p>
         </CardContent>
       </Card>
+
+      {period === "personalizado" && (
+        <Card>
+          <CardContent className="pt-4 grid grid-cols-2 gap-3">
+            <div className="space-y-1.5 text-left">
+              <Label htmlFor="uber-start">Data Início</Label>
+              <Input
+                id="uber-start"
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+            </div>
+            <div className="space-y-1.5 text-left">
+              <Label htmlFor="uber-end">Data Fim</Label>
+              <Input
+                id="uber-end"
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <Button onClick={handleSyncPluggy} disabled={syncingPluggy} variant="secondary" className="w-full">
         <RefreshCw className={`mr-2 h-4 w-4 ${syncingPluggy ? "animate-spin" : ""}`} />
@@ -677,6 +833,28 @@ function MotoTabInner() {
         .sort((a, b) => (a[0] < b[0] ? 1 : -1))
         .map(([key, v]) => ({ key, ...v })),
     );
+  }
+
+  async function reopenMonth(monthKey: string, label: string) {
+    if (!confirm(`Deseja reabrir o mês de ${label}? Todos os gastos arquivados deste período voltarão a ficar ativos no painel.`)) {
+      return;
+    }
+
+    const startOfMonth = `${monthKey}-01`;
+    const year = parseInt(monthKey.split("-")[0]);
+    const month = parseInt(monthKey.split("-")[1]);
+    const endOfMonth = new Date(year, month, 0).toISOString().slice(0, 10);
+
+    const { error } = await supabase
+      .from("moto_expenses")
+      .update({ is_archived: false, closed_at: null })
+      .eq("is_archived", true)
+      .gte("expense_date", startOfMonth)
+      .lte("expense_date", endOfMonth);
+
+    if (error) return toast.error(error.message);
+    toast.success(`O mês de ${label} foi reaberto com sucesso!`);
+    await Promise.all([load(), loadHistory()]);
   }
 
   async function loadRules() {
@@ -1000,12 +1178,13 @@ function MotoTabInner() {
                 <TableHead>Mês</TableHead>
                 <TableHead className="text-right">Itens</TableHead>
                 <TableHead className="text-right">Total</TableHead>
+                <TableHead className="w-12 text-center">Ações</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {history.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={3} className="py-6 text-center text-sm text-muted-foreground">
+                  <TableCell colSpan={4} className="py-6 text-center text-sm text-muted-foreground">
                     Nenhum mês fechado ainda.
                   </TableCell>
                 </TableRow>
@@ -1015,6 +1194,17 @@ function MotoTabInner() {
                     <TableCell className="capitalize">{h.label}</TableCell>
                     <TableCell className="text-right tabular-nums text-muted-foreground">{h.count}</TableCell>
                     <TableCell className="text-right tabular-nums font-medium">{BRL(h.total)}</TableCell>
+                    <TableCell className="w-12 text-center py-1">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7 text-muted-foreground hover:text-primary"
+                        title="Reabrir mês"
+                        onClick={() => reopenMonth(h.key, h.label)}
+                      >
+                        <RefreshCw className="h-3.5 w-3.5" />
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))
               )}

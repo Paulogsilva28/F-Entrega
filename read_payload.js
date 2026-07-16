@@ -9,21 +9,21 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 async function main() {
   const { data, error } = await supabase
     .from('pluggy_sync_logs')
-    .select('payload')
+    .select('id, created_at, log_type, message, payload')
     .order('created_at', { ascending: false })
-    .limit(1);
+    .limit(15);
 
   if (error) {
     console.error('Error fetching logs:', error);
     return;
   }
 
-  if (data && data.length > 0) {
-    fs.writeFileSync('scratch_log_payload.json', JSON.stringify(data[0].payload, null, 2));
-    console.log('Successfully wrote payload to scratch_log_payload.json');
-  } else {
-    console.log('No logs found.');
-  }
+  console.log('Total logs fetched:', data.length);
+  data.forEach((r, idx) => {
+    console.log(`[${idx}] Date: ${r.created_at} | Type: ${r.log_type} | Msg: ${r.message}`);
+  });
+
+  fs.writeFileSync('scratch_all_logs.json', JSON.stringify(data, null, 2));
 }
 
 main();
