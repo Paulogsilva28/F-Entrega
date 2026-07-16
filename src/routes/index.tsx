@@ -2,12 +2,12 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BarChart3, Mail, Sparkles, ShieldCheck } from "lucide-react";
+import { ArrowRight, BarChart3, Mail, Sparkles, ShieldCheck, Zap } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Painel do Motoboy — Ganhos 99Food e gastos da moto" },
+      { title: "F-Entrega — Ganhos 99Food, Uber e gastos da moto" },
       {
         name: "description",
         content:
@@ -48,11 +48,11 @@ function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="mx-auto flex max-w-5xl items-center justify-between px-4 py-5">
-        <div className="flex items-center gap-2 text-sm font-semibold">
-          <div className="size-7 rounded-md bg-foreground text-background grid place-items-center text-xs">
-            P
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-black shadow-md shadow-primary/20">
+            <Zap className="h-4.5 w-4.5 fill-current text-primary-foreground" />
           </div>
-          Painel do Motoboy
+          <span className="font-extrabold tracking-tight">F-Entrega</span>
         </div>
         <Link to="/auth">
           <Button variant="ghost" size="sm">Entrar</Button>
@@ -65,8 +65,8 @@ function Landing() {
             <Sparkles className="size-3" />
             Insights mensais com IA
           </div>
-          <h1 className="mx-auto max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl">
-            Seus ganhos da 99Food e gastos da moto, num só lugar.
+          <h1 className="mx-auto max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl text-left sm:text-center">
+            Seus ganhos da 99Food, Uber e gastos da moto, num só lugar.
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
             Conecte seu Gmail, importamos automaticamente seus saques da 99Food e Uber, e você
@@ -149,7 +149,7 @@ function Landing() {
       </main>
 
       <footer className="mx-auto max-w-5xl px-4 py-8 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Painel do Motoboy
+        © {new Date().getFullYear()} F-Entrega
       </footer>
     </div>
   );
