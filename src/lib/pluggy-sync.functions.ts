@@ -134,6 +134,10 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
       }
 
       const { results: transactions } = await txRes.json();
+      console.log(`[Pluggy] Fetched ${transactions?.length ?? 0} transactions for account ${accId}`);
+      if (transactions && transactions.length > 0) {
+        console.log(`[Pluggy] Sample transaction: ${transactions[0].description} | Amount: ${transactions[0].amount}`);
+      }
 
       for (const tx of (transactions ?? [])) {
         const rawAmount = Number(tx.amount);
