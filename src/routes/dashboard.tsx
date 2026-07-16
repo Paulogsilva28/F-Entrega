@@ -21,12 +21,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
-import { LogOut, RefreshCw, Trash2, Plus, Archive, History, Sparkles } from "lucide-react";
+import { LogOut, RefreshCw, Trash2, Plus, Archive, History } from "lucide-react";
 import { listFoodWithdrawals, syncFoodWithdrawals } from "@/lib/gmail-sync.functions";
-import {
-  getMonthlyInsights,
-  regenerateMonthlyInsights,
-} from "@/lib/insights.functions";
 
 export const Route = createFileRoute("/dashboard")({
   component: DashboardPage,
@@ -200,7 +196,6 @@ function MonthSummary({ userId }: { userId: string }) {
   const positive = balance >= 0;
 
   return (
-    <>
     <Card
       className={`mb-4 border-2 ${
         positive ? "border-emerald-500/40 bg-emerald-500/5" : "border-red-500/40 bg-red-500/5"
@@ -225,105 +220,6 @@ function MonthSummary({ userId }: { userId: string }) {
           <span>Ganhos: <span className="tabular-nums text-emerald-500">{BRL(income)}</span></span>
           <span>Gastos: <span className="tabular-nums text-red-500">{BRL(expenses)}</span></span>
         </div>
-      </CardContent>
-    </Card>
-    <MonthlyInsightsCard />
-    </>
-  );
-}
-
-function MonthlyInsightsCard() {
-  const month = useMemo(() => {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-  }, []);
-  const [content, setContent] = useState<string>("");
-  const [generatedAt, setGeneratedAt] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [regenerating, setRegenerating] = useState(false);
-
-  async function load() {
-    setLoading(true);
-    try {
-      const res = await getMonthlyInsights({ data: { month } });
-      setContent(res.content);
-      setGeneratedAt(res.generated_at);
-    } catch (e: any) {
-      toast.error(e?.message ?? "Erro ao gerar insights");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function regenerate() {
-    setRegenerating(true);
-    try {
-      const res = await regenerateMonthlyInsights({ data: { month } });
-      setContent(res.content);
-      setGeneratedAt(res.generated_at);
-      toast.success("Análise atualizada");
-    } catch (e: any) {
-      toast.error(e?.message ?? "Erro ao atualizar análise");
-    } finally {
-      setRegenerating(false);
-    }
-  }
-
-  useEffect(() => {
-    load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [month]);
-
-  const bullets = content
-    .split("\n")
-    .map((l) => l.trim())
-    .filter((l) => l.startsWith("-") || l.startsWith("•"))
-    .map((l) => l.replace(/^[-•]\s*/, ""));
-
-  return (
-    <Card className="mb-4">
-      <CardHeader className="pb-2">
-        <div className="flex items-center justify-between gap-2">
-          <CardTitle className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-muted-foreground">
-            <Sparkles className="h-3.5 w-3.5" />
-            Insights do mês
-          </CardTitle>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-7 px-2 text-xs"
-            onClick={regenerate}
-            disabled={loading || regenerating}
-          >
-            <RefreshCw className={`mr-1 h-3 w-3 ${regenerating ? "animate-spin" : ""}`} />
-            Atualizar
-          </Button>
-        </div>
-      </CardHeader>
-      <CardContent>
-        {loading ? (
-          <div className="space-y-2">
-            <div className="h-3 w-full animate-pulse rounded bg-muted" />
-            <div className="h-3 w-5/6 animate-pulse rounded bg-muted" />
-            <div className="h-3 w-4/6 animate-pulse rounded bg-muted" />
-          </div>
-        ) : bullets.length > 0 ? (
-          <ul className="space-y-1.5 text-sm">
-            {bullets.map((b, i) => (
-              <li key={i} className="flex gap-2">
-                <span className="text-muted-foreground">•</span>
-                <span>{b}</span>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-sm text-muted-foreground">{content}</p>
-        )}
-        {generatedAt && (
-          <p className="mt-3 text-[10px] text-muted-foreground">
-            Atualizado em {new Date(generatedAt).toLocaleString("pt-BR")}
-          </p>
-        )}
       </CardContent>
     </Card>
   );
