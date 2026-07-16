@@ -46,6 +46,17 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
       accountIds.push(PLUGGY_ACCOUNT_ID);
       console.log("[Pluggy] Using explicit accountId:", PLUGGY_ACCOUNT_ID);
     } else if (PLUGGY_ITEM_ID) {
+      console.log("[Pluggy] Fetching item status first for:", PLUGGY_ITEM_ID);
+      const itemRes = await fetch(`https://api.pluggy.ai/items/${PLUGGY_ITEM_ID}`, {
+        headers: { "X-API-KEY": apiKey },
+      });
+      if (itemRes.ok) {
+        const itemData = await itemRes.json();
+        console.log("[Pluggy] Item status:", itemData.status, "executionStatus:", itemData.executionStatus, "itemRaw:", JSON.stringify(itemData));
+      } else {
+        console.error("[Pluggy] Failed to fetch item info:", await itemRes.text());
+      }
+
       console.log("[Pluggy] Fetching accounts for itemId:", PLUGGY_ITEM_ID);
       const accountsRes = await fetch(`https://api.pluggy.ai/accounts?itemId=${PLUGGY_ITEM_ID}`, {
         headers: { "X-API-KEY": apiKey },
@@ -59,7 +70,24 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
 
       const accData = await accountsRes.json();
       console.log("[Pluggy] Accounts raw response:", JSON.stringify(accData));
-      const accounts = accData.results ?? [];
+      let accounts = accData.results ?? [];
+
+      if (accounts.length === 0) {
+        console.log("[Pluggy] Accounts list was empty. Trying workspace fallback (fetching all accounts)...");
+        const allAccsRes = await fetch("https://api.pluggy.ai/accounts", {
+          headers: { "X-API-KEY": apiKey },
+        });
+        if (allAccsRes.ok) {
+          const allAccsData = await allAccsRes.json();
+          console.log("[Pluggy] Workspace fallback accounts response:", JSON.stringify(allAccsData));
+          const allAccs = allAccsData.results ?? [];
+          accounts = allAccs.filter((a: any) => a.itemId === PLUGGY_ITEM_ID);
+          console.log("[Pluggy] Workspace fallback matched accounts count:", accounts.length);
+        } else {
+          console.error("[Pluggy] Workspace fallback fetch failed:", await allAccsRes.text());
+        }
+      }
+
       console.log("[Pluggy] Extracted accounts count:", accounts.length);
       for (const acc of accounts) {
         console.log("[Pluggy] Account found:", acc.id, acc.name, acc.type);
