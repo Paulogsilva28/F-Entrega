@@ -146,6 +146,10 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
         const description = (tx.description ?? "").toUpperCase();
         const date = (tx.date ?? "").slice(0, 10); // Formato YYYY-MM-DD
 
+        if (date.includes("2026-07-15") || date.includes("2026-07-16")) {
+          console.log("[Pluggy] Transaction raw 15/16:", JSON.stringify(tx));
+        }
+
         if (rawAmount < 0) {
           // --- GASTOS / SAÍDAS ---
           const amount = Math.abs(rawAmount);
