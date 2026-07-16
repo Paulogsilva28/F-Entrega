@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
-import { runGmailSyncForUser } from "./gmail-sync.server";
+import { runGmailSyncForUser } from "@/server/gmail-sync.server";
 
 export const listFoodWithdrawals = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])

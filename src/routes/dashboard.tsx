@@ -22,7 +22,7 @@ import {
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { LogOut, RefreshCw, Trash2, Plus, Archive, History, Sparkles } from "lucide-react";
-import { listFoodWithdrawals, syncFoodWithdrawals } from "@/server/gmail-sync.functions";
+import { listFoodWithdrawals, syncFoodWithdrawals } from "@/lib/gmail-sync.functions";
 import {
   getMonthlyInsights,
   regenerateMonthlyInsights,
