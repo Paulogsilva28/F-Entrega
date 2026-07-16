@@ -1,5 +1,3 @@
-import { supabaseAdmin } from "@/integrations/supabase/client.server";
-
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/google_mail/gmail/v1";
 const SYNC_LOOKBACK_DAYS = 180;
 const SYNC_MAX_RESULTS = 120;
@@ -77,8 +75,7 @@ async function gmailFetch(path: string): Promise<any> {
   return data;
 }
 
-export async function runGmailSyncForUser(userId: string) {
-  const supabase = supabaseAdmin;
+export async function runGmailSyncForUser(supabase: any, userId: string) {
   try {
     const query = buildWithdrawalQuery();
     const list = await gmailFetch(`/users/me/messages?q=${query}&maxResults=${SYNC_MAX_RESULTS}`);

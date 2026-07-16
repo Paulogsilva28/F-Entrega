@@ -1,15 +1,14 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { runGmailSyncForUser } from "@/server/gmail-sync.server";
 
 export const listFoodWithdrawals = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data: { since: string }) => data)
   .handler(async ({ data, context }) => {
-    const { userId } = context;
+    const { supabase, userId } = context;
 
-    const { data: rows, error } = await supabaseAdmin
+    const { data: rows, error } = await supabase
       .from("food_withdrawals")
       .select("id, amount, withdrawal_date")
       .eq("user_id", userId)
@@ -26,5 +25,6 @@ export const listFoodWithdrawals = createServerFn({ method: "POST" })
 export const syncFoodWithdrawals = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    return await runGmailSyncForUser(context.userId);
+    const { supabase, userId } = context;
+    return await runGmailSyncForUser(supabase, userId);
   });
