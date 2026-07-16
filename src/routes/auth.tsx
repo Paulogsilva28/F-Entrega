@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
+import { Zap } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
   component: AuthPage,
@@ -76,9 +77,15 @@ function AuthPage() {
     <div className="flex min-h-screen items-center justify-center px-4">
       <Toaster theme="dark" />
       <div className="w-full max-w-sm">
-        <div className="mb-8 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight">Painel Financeiro</h1>
-          <p className="mt-1 text-sm text-muted-foreground">99Food & Gestão da Moto</p>
+        <div className="mb-8 flex flex-col items-center justify-center text-center">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground font-black shadow-lg shadow-primary/20 mb-3 animate-bounce">
+            <Zap className="h-6 w-6 fill-current text-primary-foreground" />
+          </div>
+          <h1 className="text-3xl font-extrabold tracking-tight flex items-center gap-1.5 leading-none">
+            <span>F-Entrega</span>
+            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">99Food, Uber & Gestão da Moto</p>
         </div>
         <Button
           type="button"

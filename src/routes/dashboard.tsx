@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
-import { LogOut, RefreshCw, Trash2, Plus, Archive, History } from "lucide-react";
+import { LogOut, RefreshCw, Trash2, Plus, Archive, History, Zap } from "lucide-react";
 import { listFoodWithdrawals } from "@/lib/gmail-sync.functions";
 import { syncPluggyExpenses } from "@/lib/pluggy-sync.functions";
 
@@ -87,9 +87,17 @@ function DashboardPage() {
       <Toaster theme="dark" />
       <header className="border-b border-border">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-          <div>
-            <h1 className="text-base font-semibold tracking-tight">Painel Financeiro</h1>
-            <p className="text-xs text-muted-foreground">{email}</p>
+          <div className="flex items-center gap-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground font-black shadow-md shadow-primary/20">
+              <Zap className="h-5 w-5 fill-current text-primary-foreground" />
+            </div>
+            <div className="text-left">
+              <h1 className="text-base font-extrabold tracking-tight flex items-center gap-1.5 leading-none">
+                <span>F-Entrega</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+              </h1>
+              <p className="text-[10px] text-muted-foreground font-medium mt-0.5">{email}</p>
+            </div>
           </div>
           <Button
             variant="ghost"
