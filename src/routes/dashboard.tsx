@@ -591,6 +591,11 @@ function MotoTabInner() {
   const [syncingPluggy, setSyncingPluggy] = useState(false);
   const [history, setHistory] = useState<Array<{ key: string; label: string; total: number; count: number }>>([]);
 
+  const [rules, setRules] = useState<Array<{ id: string; nome: string; tipo: string }>>([]);
+  const [newRuleName, setNewRuleName] = useState("");
+  const [newRuleTipo, setNewRuleTipo] = useState<"combustivel" | "manutencao">("combustivel");
+  const [loadingRules, setLoadingRules] = useState(true);
+
   async function handleSyncPluggy() {
     setSyncingPluggy(true);
     try {
@@ -640,9 +645,50 @@ function MotoTabInner() {
     );
   }
 
+  async function loadRules() {
+    setLoadingRules(true);
+    const { data, error } = await supabase
+      .from("estabelecimentos_moto")
+      .select("id, nome, tipo")
+      .order("nome", { ascending: true });
+    setLoadingRules(false);
+    if (error) return toast.error(error.message);
+    setRules(data ?? []);
+  }
+
+  async function addRule(e: React.FormEvent) {
+    e.preventDefault();
+    if (!newRuleName.trim()) {
+      return toast.error("Informe o nome do estabelecimento.");
+    }
+    const nameUpper = newRuleName.trim().toUpperCase();
+
+    const { data: u } = await supabase.auth.getUser();
+    if (!u.user) return toast.error("Sessão expirada");
+
+    const { error } = await supabase.from("estabelecimentos_moto").insert({
+      nome: nameUpper,
+      tipo: newRuleTipo,
+      user_id: u.user.id,
+    });
+
+    if (error) return toast.error(error.message);
+    setNewRuleName("");
+    toast.success("Regra de matching adicionada!");
+    loadRules();
+  }
+
+  async function removeRule(id: string) {
+    const { error } = await supabase.from("estabelecimentos_moto").delete().eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success("Regra removida");
+    loadRules();
+  }
+
   useEffect(() => {
     load();
     loadHistory();
+    loadRules();
   }, []);
 
   async function add(e: React.FormEvent) {
@@ -829,6 +875,83 @@ function MotoTabInner() {
           </AlertDialogContent>
         </AlertDialog>
       )}
+
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-sm font-medium">Regras de Sincronização Automática</CardTitle>
+          <p className="text-xs text-muted-foreground">
+            Cadastre nomes de postos ou oficinas para que o extrato do banco os identifique automaticamente.
+          </p>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <form onSubmit={addRule} className="flex gap-2">
+            <Input
+              placeholder="Ex: SUPERMERCADO LAR FEL"
+              value={newRuleName}
+              onChange={(e) => setNewRuleName(e.target.value)}
+              className="flex-1"
+            />
+            <Select value={newRuleTipo} onValueChange={(val: any) => setNewRuleTipo(val)}>
+              <SelectTrigger className="w-[140px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="combustivel">⛽ Gasolina</SelectItem>
+                <SelectItem value="manutencao">🔧 Manutenção</SelectItem>
+              </SelectContent>
+            </Select>
+            <Button type="submit">
+              Cadastrar
+            </Button>
+          </form>
+
+          <div className="rounded-md border border-border overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="py-2 text-xs">Estabelecimento (Procurar no extrato)</TableHead>
+                  <TableHead className="py-2 text-xs text-right">Tipo</TableHead>
+                  <TableHead className="w-10 py-2" />
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {loadingRules ? (
+                  <TableRow>
+                    <TableCell colSpan={3} className="text-center text-xs text-muted-foreground py-4">
+                      Carregando regras...
+                    </TableCell>
+                  </TableRow>
+                ) : rules.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={3} className="text-center text-xs text-muted-foreground py-4">
+                      Nenhuma regra cadastrada.
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  rules.map((r) => (
+                    <TableRow key={r.id} className="hover:bg-transparent">
+                      <TableCell className="font-mono text-xs py-2">{r.nome}</TableCell>
+                      <TableCell className="text-xs text-right py-2">
+                        {r.tipo === "combustivel" ? "⛽ Gasolina" : "🔧 Manutenção"}
+                      </TableCell>
+                      <TableCell className="py-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-6 w-6 text-muted-foreground hover:text-destructive"
+                          onClick={() => removeRule(r.id)}
+                        >
+                          <Trash2 className="h-3 w-3" />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader className="pb-3">
