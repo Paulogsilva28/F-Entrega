@@ -191,8 +191,27 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
         } else if (rawAmount > 0) {
           // --- GANHOS / ENTRADAS (Créditos) ---
           const txStr = JSON.stringify(tx).toUpperCase();
-          const isUber = txStr.includes("UBER") || txStr.includes("PARTNERPAY") || txStr.includes("DIGIO");
-          const is99 = txStr.includes("99PAY") || txStr.includes("99 FOOD") || txStr.includes("99FOOD") || txStr.includes("99APP") || txStr.includes("99 TECNOLOGIA") || txStr.includes("99 TEC") || txStr.includes("99 IP") || txStr.includes("99PAY IP");
+          const payerRouting = tx.paymentData?.payer?.routingNumber;
+          const payerISPB = tx.paymentData?.payer?.routingNumberISPB;
+
+          const isUber = 
+            txStr.includes("UBER") || 
+            txStr.includes("PARTNERPAY") || 
+            txStr.includes("DIGIO") ||
+            payerRouting === "335" ||
+            payerISPB === "27098060";
+
+          const is99 = 
+            txStr.includes("99PAY") || 
+            txStr.includes("99 FOOD") || 
+            txStr.includes("99FOOD") || 
+            txStr.includes("99APP") || 
+            txStr.includes("99 TECNOLOGIA") || 
+            txStr.includes("99 TEC") || 
+            txStr.includes("99 IP") || 
+            txStr.includes("99PAY IP") ||
+            payerRouting === "769" ||
+            payerISPB === "24313102";
 
           if (isUber) {
             const { error: insertError } = await supabase

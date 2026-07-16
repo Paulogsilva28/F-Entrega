@@ -1,0 +1,158 @@
+{
+  "sampleTransactions": [
+    {
+      "id": "65b7310e-83cd-4c6c-a881-0089b77b614d",
+      "date": "2026-07-15T14:55:28.268Z",
+      "type": "DEBIT",
+      "order": 0,
+      "amount": -8.14,
+      "status": "POSTED",
+      "balance": null,
+      "category": "Groceries",
+      "merchant": null,
+      "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+      "createdAt": "2026-07-16T07:01:20.918Z",
+      "updatedAt": "2026-07-16T07:01:20.918Z",
+      "categoryId": "10000000",
+      "providerId": null,
+      "description": "Compra no débito|SUPERMERCADO LAR FEL",
+      "paymentData": {
+        "payer": {
+          "name": null,
+          "branchNumber": null,
+          "accountNumber": null,
+          "routingNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "073.478.261-60"
+          },
+          "routingNumberISPB": null
+        },
+        "reason": null,
+        "receiver": null,
+        "paymentMethod": "OTHER",
+        "boletoMetadata": null,
+        "referenceNumber": null,
+        "receiverReferenceId": null
+      },
+      "currencyCode": "BRL",
+      "providerCode": null,
+      "operationType": "CARTAO",
+      "descriptionRaw": "Compra no débito|SUPERMERCADO LAR FEL",
+      "creditCardMetadata": null,
+      "amountInAccountCurrency": null,
+      "operationTypeAdditionalInfo": null
+    },
+    {
+      "id": "2bbfc730-f218-407b-a158-b8c32e79b962",
+      "date": "2026-07-15T13:38:51.736Z",
+      "type": "DEBIT",
+      "order": 1,
+      "amount": -50,
+      "status": "POSTED",
+      "balance": null,
+      "category": "Telecommunications",
+      "merchant": {
+        "cnae": "4752100",
+        "cnpj": "04193879000196",
+        "category": "Telecommunications",
+        "businessName": "MULTIDISPLAY COMERCIO E SERVICOS TECNOLOGICOS LTDA."
+      },
+      "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+      "createdAt": "2026-07-16T07:01:20.918Z",
+      "updatedAt": "2026-07-16T07:01:20.918Z",
+      "categoryId": "07010000",
+      "providerId": null,
+      "description": "Transferência enviada|MULTIDISPLAY COMERCIO E SERVICOS TECNOLOGICOS LTDA.",
+      "paymentData": {
+        "payer": {
+          "name": null,
+          "branchNumber": null,
+          "accountNumber": null,
+          "routingNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "073.478.261-60"
+          },
+          "routingNumberISPB": null
+        },
+        "reason": null,
+        "receiver": {
+          "name": "MULTIDISPLAY COMERCIO E SERVICOS TECNOLOGICOS LTDA.",
+          "branchNumber": "0001",
+          "accountNumber": "00320615-4",
+          "routingNumber": "213",
+          "documentNumber": {
+            "type": "CNPJ",
+            "value": "04.193.879/0001-96"
+          },
+          "routingNumberISPB": "54403563"
+        },
+        "paymentMethod": "PIX",
+        "boletoMetadata": null,
+        "referenceNumber": null,
+        "receiverReferenceId": null
+      },
+      "currencyCode": "BRL",
+      "providerCode": null,
+      "operationType": "PIX",
+      "descriptionRaw": "Transferência enviada|MULTIDISPLAY COMERCIO E SERVICOS TECNOLOGICOS LTDA.",
+      "creditCardMetadata": null,
+      "amountInAccountCurrency": null,
+      "operationTypeAdditionalInfo": null
+    },
+    {
+      "id": "bd8d910b-1b88-4ef9-8b73-725f1da98bf4",
+      "date": "2026-07-15T13:36:57.786Z",
+      "type": "CREDIT",
+      "order": 2,
+      "amount": 67.5,
+      "status": "POSTED",
+      "balance": null,
+      "category": "Same person transfer",
+      "merchant": null,
+      "accountId": "6a304eb1-e0d4-4ec6-a3dc-721d2f559582",
+      "createdAt": "2026-07-16T07:01:20.918Z",
+      "updatedAt": "2026-07-16T07:01:20.918Z",
+      "categoryId": "04000000",
+      "providerId": null,
+      "description": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+      "paymentData": {
+        "payer": {
+          "name": null,
+          "branchNumber": "0001",
+          "accountNumber": "28488607-6",
+          "routingNumber": "769",
+          "documentNumber": {
+            "type": "CPF",
+            "value": "073.478.261-60"
+          },
+          "routingNumberISPB": "24313102"
+        },
+        "reason": null,
+        "receiver": {
+          "name": null,
+          "branchNumber": null,
+          "accountNumber": null,
+          "routingNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "073.478.261-60"
+          },
+          "routingNumberISPB": null
+        },
+        "paymentMethod": "PIX",
+        "boletoMetadata": null,
+        "referenceNumber": null,
+        "receiverReferenceId": null
+      },
+      "currencyCode": "BRL",
+      "providerCode": null,
+      "operationType": "PIX",
+      "descriptionRaw": "Transferência Recebida|PAULO HENRIQUE GOUVEIA DA SILVA",
+      "creditCardMetadata": null,
+      "amountInAccountCurrency": null,
+      "operationTypeAdditionalInfo": null
+    }
+  ]
+}
