@@ -278,6 +278,26 @@ function FoodTab() {
     }
   }
 
+  const [syncingPluggy, setSyncingPluggy] = useState(false);
+
+  async function handleSyncPluggy() {
+    setSyncingPluggy(true);
+    try {
+      const res = await syncPluggyExpenses();
+      toast.success(
+        `Sincronização concluída! ` +
+        `${res.insertedExpenses} despesas de moto, ` +
+        `${res.insertedUber} ganhos Uber e ` +
+        `${res.insertedFood} ganhos 99Food importados (ignorados/duplicados: ${res.skipped}).`
+      );
+      await load();
+    } catch (e: any) {
+      toast.error(e?.message ?? "Erro ao sincronizar com a Pluggy");
+    } finally {
+      setSyncingPluggy(false);
+    }
+  }
+
   const total = items.reduce((s, i) => s + i.amount, 0);
 
   return (
@@ -312,10 +332,16 @@ function FoodTab() {
         </CardContent>
       </Card>
 
-      <Button onClick={handleSync} disabled={syncing} variant="secondary" className="w-full">
-        <RefreshCw className={`mr-2 h-4 w-4 ${syncing ? "animate-spin" : ""}`} />
-        {syncing ? "Sincronizando e-mails..." : "Sincronizar e-mails"}
-      </Button>
+      <div className="grid grid-cols-2 gap-2">
+        <Button onClick={handleSync} disabled={syncing} variant="secondary" className="w-full">
+          <RefreshCw className={`mr-2 h-4 w-4 ${syncing ? "animate-spin" : ""}`} />
+          {syncing ? "Sincronizando e-mails..." : "Sincronizar e-mails"}
+        </Button>
+        <Button onClick={handleSyncPluggy} disabled={syncingPluggy} variant="secondary" className="w-full">
+          <RefreshCw className={`mr-2 h-4 w-4 ${syncingPluggy ? "animate-spin" : ""}`} />
+          {syncingPluggy ? "Sincronizando Pluggy..." : "Sincronizar Extrato (Pluggy)"}
+        </Button>
+      </div>
 
       <Card>
         <CardContent className="p-0">
@@ -437,6 +463,26 @@ function UberTab() {
     setItems((s) => s.filter((i) => i.id !== id));
   }
 
+  const [syncingPluggy, setSyncingPluggy] = useState(false);
+
+  async function handleSyncPluggy() {
+    setSyncingPluggy(true);
+    try {
+      const res = await syncPluggyExpenses();
+      toast.success(
+        `Sincronização concluída! ` +
+        `${res.insertedExpenses} despesas de moto, ` +
+        `${res.insertedUber} ganhos Uber e ` +
+        `${res.insertedFood} ganhos 99Food importados (ignorados/duplicados: ${res.skipped}).`
+      );
+      await load();
+    } catch (e: any) {
+      toast.error(e?.message ?? "Erro ao sincronizar com a Pluggy");
+    } finally {
+      setSyncingPluggy(false);
+    }
+  }
+
   const total = items.reduce((s, i) => s + i.amount, 0);
 
   return (
@@ -469,6 +515,11 @@ function UberTab() {
           </p>
         </CardContent>
       </Card>
+
+      <Button onClick={handleSyncPluggy} disabled={syncingPluggy} variant="secondary" className="w-full">
+        <RefreshCw className={`mr-2 h-4 w-4 ${syncingPluggy ? "animate-spin" : ""}`} />
+        {syncingPluggy ? "Sincronizando Pluggy..." : "Sincronizar Extrato (Pluggy)"}
+      </Button>
 
       <Card>
         <CardHeader className="pb-3">
@@ -600,7 +651,12 @@ function MotoTabInner() {
     setSyncingPluggy(true);
     try {
       const res = await syncPluggyExpenses();
-      toast.success(`${res.inserted} novos gastos importados, ${res.skipped} duplicados.`);
+      toast.success(
+        `Sincronização concluída! ` +
+        `${res.insertedExpenses} despesas de moto, ` +
+        `${res.insertedUber} ganhos Uber e ` +
+        `${res.insertedFood} ganhos 99Food importados (ignorados/duplicados: ${res.skipped}).`
+      );
       await load();
     } catch (e: any) {
       toast.error(e?.message ?? "Erro ao sincronizar com a Pluggy");

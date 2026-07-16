@@ -118,7 +118,9 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
       tipo: r.tipo,
     }));
 
-    let inserted = 0;
+    let insertedExpenses = 0;
+    let insertedUber = 0;
+    let insertedFood = 0;
     let skipped = 0;
 
     // 4. Buscar e processar transações de cada conta identificada
@@ -141,42 +143,93 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
 
       for (const tx of (transactions ?? [])) {
         const rawAmount = Number(tx.amount);
-        
-        // Ignorar entradas (créditos).
-        if (rawAmount >= 0) continue;
-
-        const amount = Math.abs(rawAmount);
         const description = (tx.description ?? "").toUpperCase();
         const date = (tx.date ?? "").slice(0, 10); // Formato YYYY-MM-DD
 
-        // Verificar se a transação corresponde a algum posto/oficina cadastrado
-        const match = rulesList.find((r) => description.includes(r.nome));
+        if (rawAmount < 0) {
+          // --- GASTOS / SAÍDAS ---
+          const amount = Math.abs(rawAmount);
 
-        if (match) {
-          const { error: insertError } = await supabase
-            .from("moto_expenses")
-            .insert({
-              user_id: userId,
-              description: `${match.nome} (${tx.description})`,
-              amount,
-              expense_date: date,
-              pluggy_transaction_id: tx.id,
-              is_archived: false,
-            });
+          // Verificar se a transação corresponde a algum posto/oficina cadastrado
+          const match = rulesList.find((r) => description.includes(r.nome));
 
-          if (insertError) {
-            // Se for código 23505 (unique_violation) no Postgres, significa que a transação já foi importada
-            if (insertError.code === "23505") {
-              skipped++;
+          if (match) {
+            const { error: insertError } = await supabase
+              .from("moto_expenses")
+              .insert({
+                user_id: userId,
+                description: `${match.nome} (${tx.description})`,
+                amount,
+                expense_date: date,
+                pluggy_transaction_id: tx.id,
+                is_archived: false,
+              });
+
+            if (insertError) {
+              if (insertError.code === "23505") {
+                skipped++;
+              } else {
+                console.error(`Failed to insert expense ${tx.id}:`, insertError.message);
+              }
             } else {
-              console.error(`Failed to insert expense ${tx.id}:`, insertError.message);
+              insertedExpenses++;
             }
-          } else {
-            inserted++;
+          }
+        } else if (rawAmount > 0) {
+          // --- GANHOS / ENTRADAS (Créditos) ---
+          const isUber = description.includes("UBER") || description.includes("PARTNERPAY") || description.includes("RAIS UBER");
+          const is99 = description.includes("99APP") || description.includes("99PAY") || description.includes("99FOOD") || description.includes("99 TECNOLOGIA") || description.includes("99 TEC");
+
+          if (isUber) {
+            const { error: insertError } = await supabase
+              .from("uber_withdrawals")
+              .insert({
+                user_id: userId,
+                amount: rawAmount,
+                withdrawal_date: new Date(date + "T12:00:00").toISOString(),
+                note: `Sincronização Pluggy (${tx.description})`,
+                pluggy_transaction_id: tx.id,
+              });
+
+            if (insertError) {
+              if (insertError.code === "23505") {
+                skipped++;
+              } else {
+                console.error(`Failed to insert Uber earning ${tx.id}:`, insertError.message);
+              }
+            } else {
+              insertedUber++;
+            }
+          } else if (is99) {
+            const { error: insertError } = await supabase
+              .from("food_withdrawals")
+              .insert({
+                user_id: userId,
+                amount: rawAmount,
+                withdrawal_date: new Date(date + "T12:00:00").toISOString(),
+                raw_subject: `Sincronização Pluggy (${tx.description})`,
+                pluggy_transaction_id: tx.id,
+              });
+
+            if (insertError) {
+              if (insertError.code === "23505") {
+                skipped++;
+              } else {
+                console.error(`Failed to insert 99 Food earning ${tx.id}:`, insertError.message);
+              }
+            } else {
+              insertedFood++;
+            }
           }
         }
       }
     }
 
-    return { inserted, skipped };
+    return {
+      inserted: insertedExpenses + insertedUber + insertedFood,
+      insertedExpenses,
+      insertedUber,
+      insertedFood,
+      skipped,
+    };
   });
