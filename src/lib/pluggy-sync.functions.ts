@@ -123,7 +123,7 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
 
     // 4. Buscar e processar transações de cada conta identificada
     for (const accId of accountIds) {
-      const txRes = await fetch(`https://api.pluggy.ai/v2/transactions?accountId=${accId}&pageSize=100`, {
+      const txRes = await fetch(`https://api.pluggy.ai/v2/transactions?accountId=${accId}`, {
         headers: { "X-API-KEY": apiKey },
       });
 
