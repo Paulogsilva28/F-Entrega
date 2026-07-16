@@ -8,10 +8,15 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
 
     const PLUGGY_CLIENT_ID = process.env.PLUGGY_CLIENT_ID;
     const PLUGGY_CLIENT_SECRET = process.env.PLUGGY_CLIENT_SECRET;
-    const PLUGGY_ACCOUNT_ID = process.env.PLUGGY_ACCOUNT_ID;
+    const PLUGGY_ITEM_ID = process.env.PLUGGY_ITEM_ID; // ID da conexão (Ex: obtido na URL do meu.pluggy.ai)
+    const PLUGGY_ACCOUNT_ID = process.env.PLUGGY_ACCOUNT_ID; // ID da conta (opcional se tiver o ITEM_ID)
 
-    if (!PLUGGY_CLIENT_ID || !PLUGGY_CLIENT_SECRET || !PLUGGY_ACCOUNT_ID) {
-      throw new Error("Missing Pluggy environment variables: PLUGGY_CLIENT_ID, PLUGGY_CLIENT_SECRET, PLUGGY_ACCOUNT_ID");
+    if (!PLUGGY_CLIENT_ID || !PLUGGY_CLIENT_SECRET) {
+      throw new Error("Missing Pluggy environment variables: PLUGGY_CLIENT_ID, PLUGGY_CLIENT_SECRET");
+    }
+
+    if (!PLUGGY_ITEM_ID && !PLUGGY_ACCOUNT_ID) {
+      throw new Error("Você precisa configurar pelo menos o PLUGGY_ITEM_ID ou PLUGGY_ACCOUNT_ID no seu painel da Cloudflare.");
     }
 
     // 1. Autenticar na API da Pluggy para obter a apiKey
@@ -31,17 +36,31 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
 
     const { apiKey } = await authRes.json();
 
-    // 2. Buscar as transações na conta da Pluggy
-    const txRes = await fetch(`https://api.pluggy.ai/transactions?accountId=${PLUGGY_ACCOUNT_ID}&pageSize=100`, {
-      headers: { "X-API-KEY": apiKey },
-    });
+    // 2. Determinar as contas (Account IDs) a serem sincronizadas
+    const accountIds: string[] = [];
 
-    if (!txRes.ok) {
-      const errText = await txRes.text();
-      throw new Error(`Failed to fetch Pluggy transactions: ${errText}`);
+    if (PLUGGY_ACCOUNT_ID) {
+      accountIds.push(PLUGGY_ACCOUNT_ID);
+    } else if (PLUGGY_ITEM_ID) {
+      // Se tivermos o ITEM_ID, buscamos todas as contas associadas a essa conexão
+      const accountsRes = await fetch(`https://api.pluggy.ai/accounts?itemId=${PLUGGY_ITEM_ID}`, {
+        headers: { "X-API-KEY": apiKey },
+      });
+
+      if (!accountsRes.ok) {
+        const errText = await accountsRes.text();
+        throw new Error(`Failed to fetch Pluggy accounts for Item ${PLUGGY_ITEM_ID}: ${errText}`);
+      }
+
+      const { results: accounts } = await accountsRes.json();
+      for (const acc of (accounts ?? [])) {
+        if (acc.id) accountIds.push(acc.id);
+      }
     }
 
-    const { results: transactions } = await txRes.json();
+    if (accountIds.length === 0) {
+      throw new Error("Nenhuma conta bancária ativa encontrada para sincronização.");
+    }
 
     // 3. Buscar as regras de matching do banco (tabela estabelecimentos_moto)
     const { data: rules, error: rulesError } = await supabase
@@ -57,44 +76,57 @@ export const syncPluggyExpenses = createServerFn({ method: "POST" })
       tipo: r.tipo,
     }));
 
-    // 4. Executar matching e registrar os gastos da moto no Supabase
     let inserted = 0;
     let skipped = 0;
 
-    for (const tx of (transactions ?? [])) {
-      const rawAmount = Number(tx.amount);
-      
-      // Ignorar entradas (créditos). Na Pluggy os gastos vêm como valores negativos.
-      if (rawAmount >= 0) continue;
+    // 4. Buscar e processar transações de cada conta identificada
+    for (const accId of accountIds) {
+      const txRes = await fetch(`https://api.pluggy.ai/transactions?accountId=${accId}&pageSize=100`, {
+        headers: { "X-API-KEY": apiKey },
+      });
 
-      const amount = Math.abs(rawAmount);
-      const description = (tx.description ?? "").toUpperCase();
-      const date = (tx.date ?? "").slice(0, 10); // Formato YYYY-MM-DD
+      if (!txRes.ok) {
+        console.error(`Failed to fetch transactions for account ${accId}`);
+        continue;
+      }
 
-      // Verificar se a transação corresponde a algum posto/oficina cadastrado
-      const match = rulesList.find((r) => description.includes(r.nome));
+      const { results: transactions } = await txRes.json();
 
-      if (match) {
-        const { error: insertError } = await supabase
-          .from("moto_expenses")
-          .insert({
-            user_id: userId,
-            description: `${match.nome} (${tx.description})`,
-            amount,
-            expense_date: date,
-            pluggy_transaction_id: tx.id,
-            is_archived: false,
-          });
+      for (const tx of (transactions ?? [])) {
+        const rawAmount = Number(tx.amount);
+        
+        // Ignorar entradas (créditos).
+        if (rawAmount >= 0) continue;
 
-        if (insertError) {
-          // Se for código 23505 (unique_violation) no Postgres, significa que a transação já foi importada
-          if (insertError.code === "23505") {
-            skipped++;
+        const amount = Math.abs(rawAmount);
+        const description = (tx.description ?? "").toUpperCase();
+        const date = (tx.date ?? "").slice(0, 10); // Formato YYYY-MM-DD
+
+        // Verificar se a transação corresponde a algum posto/oficina cadastrado
+        const match = rulesList.find((r) => description.includes(r.nome));
+
+        if (match) {
+          const { error: insertError } = await supabase
+            .from("moto_expenses")
+            .insert({
+              user_id: userId,
+              description: `${match.nome} (${tx.description})`,
+              amount,
+              expense_date: date,
+              pluggy_transaction_id: tx.id,
+              is_archived: false,
+            });
+
+          if (insertError) {
+            // Se for código 23505 (unique_violation) no Postgres, significa que a transação já foi importada
+            if (insertError.code === "23505") {
+              skipped++;
+            } else {
+              console.error(`Failed to insert expense ${tx.id}:`, insertError.message);
+            }
           } else {
-            console.error(`Failed to insert expense ${tx.id}:`, insertError.message);
+            inserted++;
           }
-        } else {
-          inserted++;
         }
       }
     }
