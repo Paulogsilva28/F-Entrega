@@ -1,9 +1,9 @@
 [
   {
-    "id": "d301419d-7b1c-4b14-a581-01e1dba11d5b",
-    "created_at": "2026-07-16T18:32:39.784012+00:00",
+    "id": "9fc6ddf0-d942-418f-a1a6-939eaba7a7b7",
+    "created_at": "2026-07-17T01:34:30.62791+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning 0b143309-4d0d-4e56-bf43-eca44a80cc5e: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning 0b143309-4d0d-4e56-bf43-eca44a80cc5e: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "0b143309-4d0d-4e56-bf43-eca44a80cc5e",
@@ -59,18 +59,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "0222856f-5371-4f75-812d-e49e5812d970",
-    "created_at": "2026-07-16T18:32:39.478377+00:00",
+    "id": "cd9c5639-453d-4140-90f7-b4fa1a32b08f",
+    "created_at": "2026-07-17T01:34:30.318409+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning b55d1cc6-e519-497e-9d27-bfaeef82138b: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning b55d1cc6-e519-497e-9d27-bfaeef82138b: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "b55d1cc6-e519-497e-9d27-bfaeef82138b",
@@ -126,18 +126,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "c011c104-105a-49f1-bd28-74187b656aaa",
-    "created_at": "2026-07-16T18:32:39.01909+00:00",
+    "id": "bf42866c-810c-4615-b7d9-4879f06ff2b9",
+    "created_at": "2026-07-17T01:34:29.844292+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning f0b2530a-0382-4989-9440-c872c188ccaf: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning f0b2530a-0382-4989-9440-c872c188ccaf: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "f0b2530a-0382-4989-9440-c872c188ccaf",
@@ -193,18 +193,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "d72613ef-591e-4b2f-9d29-cc01cffe0a3a",
-    "created_at": "2026-07-16T18:32:38.713412+00:00",
+    "id": "a5735118-55d0-4b40-b5f3-068ba7d6e81e",
+    "created_at": "2026-07-17T01:34:29.535536+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning 0784cab3-3983-4ee1-a778-d5dc7f5a2dc7: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning 0784cab3-3983-4ee1-a778-d5dc7f5a2dc7: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "0784cab3-3983-4ee1-a778-d5dc7f5a2dc7",
@@ -260,18 +260,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "94f54d3b-d468-493e-936f-536e5051873c",
-    "created_at": "2026-07-16T18:32:38.402939+00:00",
+    "id": "f49f229b-ebb2-44e1-a0d7-4ae9a6489286",
+    "created_at": "2026-07-17T01:34:29.217302+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning 2d7f6913-0085-4077-8a9e-8b5fd687935e: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning 2d7f6913-0085-4077-8a9e-8b5fd687935e: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "2d7f6913-0085-4077-8a9e-8b5fd687935e",
@@ -327,18 +327,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "1815efb4-247e-4e84-a5a5-50133f40d7d6",
-    "created_at": "2026-07-16T18:32:37.941201+00:00",
+    "id": "50ab2038-6acf-45b8-811d-265e0bb2bb85",
+    "created_at": "2026-07-17T01:34:28.748286+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert Uber earning 15da05b1-4bc2-458f-ba0c-0d14d597a1e1: Could not find the 'pluggy_transaction_id' column of 'uber_withdrawals' in the schema cache",
+    "message": "Failed to insert Uber earning 15da05b1-4bc2-458f-ba0c-0d14d597a1e1: duplicate key value violates unique constraint \"uber_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "15da05b1-4bc2-458f-ba0c-0d14d597a1e1",
@@ -398,18 +398,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'uber_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"uber_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "6a6057b7-29fd-48d2-99ea-5289c0b75655",
-    "created_at": "2026-07-16T18:32:37.636114+00:00",
+    "id": "777ad37a-5d45-4449-9f40-33636fdc408c",
+    "created_at": "2026-07-17T01:34:28.438429+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning 9fc40d32-a7ba-4f9e-a448-f5aff65e8e9f: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning 9fc40d32-a7ba-4f9e-a448-f5aff65e8e9f: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "9fc40d32-a7ba-4f9e-a448-f5aff65e8e9f",
@@ -465,18 +465,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "466f00c3-d336-4cbb-ae3b-a9d82ffb9e20",
-    "created_at": "2026-07-16T18:32:37.325999+00:00",
+    "id": "3a03a11d-6110-474e-a423-9341944aa2f3",
+    "created_at": "2026-07-17T01:34:28.130294+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning 76cb1ec2-78d5-4704-ab75-2cd99491230b: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning 76cb1ec2-78d5-4704-ab75-2cd99491230b: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "76cb1ec2-78d5-4704-ab75-2cd99491230b",
@@ -532,18 +532,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "3097f696-13fe-424f-88e0-2a9d73e57019",
-    "created_at": "2026-07-16T18:32:37.017793+00:00",
+    "id": "e972a757-5e74-49d3-acb3-596f85d1fb3b",
+    "created_at": "2026-07-17T01:34:27.82444+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning a020a673-4261-4fce-83c9-b6b49f213419: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning a020a673-4261-4fce-83c9-b6b49f213419: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "a020a673-4261-4fce-83c9-b6b49f213419",
@@ -599,18 +599,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "ce51392a-a6be-4ac2-bf4b-8d5a0b18d7f8",
-    "created_at": "2026-07-16T18:32:36.715197+00:00",
+    "id": "21c41179-f052-4090-9b47-0e609a9d6379",
+    "created_at": "2026-07-17T01:34:27.510358+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert Uber earning 1418420b-546a-4a6e-8fdc-514419a357c8: Could not find the 'pluggy_transaction_id' column of 'uber_withdrawals' in the schema cache",
+    "message": "Failed to insert Uber earning 1418420b-546a-4a6e-8fdc-514419a357c8: duplicate key value violates unique constraint \"uber_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "1418420b-546a-4a6e-8fdc-514419a357c8",
@@ -670,18 +670,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'uber_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"uber_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "ac7b0cc4-0729-4e37-adf3-c54b53ba5948",
-    "created_at": "2026-07-16T18:32:36.397025+00:00",
+    "id": "1e633406-d7e6-40d1-8972-56a8e3e0d209",
+    "created_at": "2026-07-17T01:34:27.195509+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning af4cb9ed-33ec-416c-9ab2-c3dba22ee460: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning af4cb9ed-33ec-416c-9ab2-c3dba22ee460: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "af4cb9ed-33ec-416c-9ab2-c3dba22ee460",
@@ -737,18 +737,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "fcb69893-c791-4bdb-a11a-d5e27460d3a2",
-    "created_at": "2026-07-16T18:32:36.090229+00:00",
+    "id": "05072f79-cda6-4b06-92da-27591669bec3",
+    "created_at": "2026-07-17T01:34:26.881606+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning 0096751f-aa4f-45a4-8402-46cf50ad564c: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning 0096751f-aa4f-45a4-8402-46cf50ad564c: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "0096751f-aa4f-45a4-8402-46cf50ad564c",
@@ -804,18 +804,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "c5a8ac72-27a1-47c8-a008-4776e654db0e",
-    "created_at": "2026-07-16T18:32:35.780732+00:00",
+    "id": "0db01ee2-00e8-4b27-8b71-84d2237af2a2",
+    "created_at": "2026-07-17T01:34:26.575782+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning 03654c81-e493-4a34-b0dd-e119dc9debb4: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning 03654c81-e493-4a34-b0dd-e119dc9debb4: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "03654c81-e493-4a34-b0dd-e119dc9debb4",
@@ -871,18 +871,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "c6a06b7a-7351-4ca6-865c-26bdb888e18a",
-    "created_at": "2026-07-16T18:32:35.465315+00:00",
+    "id": "3af15547-3752-4e80-a5e3-77456fc2a4d1",
+    "created_at": "2026-07-17T01:34:26.265481+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning 5c67ef8d-50f8-4c01-91e9-0b5081eab9c4: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning 5c67ef8d-50f8-4c01-91e9-0b5081eab9c4: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "5c67ef8d-50f8-4c01-91e9-0b5081eab9c4",
@@ -938,18 +938,18 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   },
   {
-    "id": "8df6bbb7-cd2c-4f84-9e55-17477f00ec27",
-    "created_at": "2026-07-16T18:32:35.154638+00:00",
+    "id": "3b9207b8-989b-4399-b609-abb58c50d147",
+    "created_at": "2026-07-17T01:34:25.956935+00:00",
     "log_type": "insert_error",
-    "message": "Failed to insert 99 Food earning e76f5190-b750-4b62-88cd-6d47fc936554: Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache",
+    "message": "Failed to insert 99 Food earning e76f5190-b750-4b62-88cd-6d47fc936554: duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\"",
     "payload": {
       "tx": {
         "id": "e76f5190-b750-4b62-88cd-6d47fc936554",
@@ -1005,10 +1005,10 @@
         "operationTypeAdditionalInfo": null
       },
       "error": {
-        "code": "PGRST204",
+        "code": "23505",
         "hint": null,
         "details": null,
-        "message": "Could not find the 'pluggy_transaction_id' column of 'food_withdrawals' in the schema cache"
+        "message": "duplicate key value violates unique constraint \"food_withdrawals_pluggy_transaction_id_key\""
       }
     }
   }

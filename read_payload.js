@@ -10,20 +10,24 @@ async function main() {
   const { data, error } = await supabase
     .from('pluggy_sync_logs')
     .select('id, created_at, log_type, message, payload')
+    .eq('log_type', 'transactions_debug')
     .order('created_at', { ascending: false })
-    .limit(15);
+    .limit(3);
 
   if (error) {
     console.error('Error fetching logs:', error);
     return;
   }
 
-  console.log('Total logs fetched:', data.length);
+  console.log('Fetched debug logs:', data.length);
   data.forEach((r, idx) => {
-    console.log(`[${idx}] Date: ${r.created_at} | Type: ${r.log_type} | Msg: ${r.message}`);
+    console.log(`[${idx}] Date: ${r.created_at} | Msg: ${r.message}`);
   });
 
-  fs.writeFileSync('scratch_all_logs.json', JSON.stringify(data, null, 2));
+  if (data.length > 0) {
+    fs.writeFileSync('scratch_latest_transactions.json', JSON.stringify(data[0].payload, null, 2));
+    console.log('Wrote latest transactions payload to scratch_latest_transactions.json');
+  }
 }
 
 main();
